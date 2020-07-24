@@ -346,4 +346,4 @@ def showfeedback():
           
 if __name__ == '__main__':
     db.create_all()
-    app.run(threaded=True, port=8000)
+    app.run(threaded=True, port=8000,debug=True)
