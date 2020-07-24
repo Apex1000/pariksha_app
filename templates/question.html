@@ -1,0 +1,196 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <div id="time" class="card center countdown" style="background-color: rgb(237, 248, 220); font-size: 30px"> Exam Start In : </div>
+      <div class="row">
+        <div id="questionlist" class="col-md-3">
+          </div>
+          <div class="card col-md-9 blue lighten-5" >
+            <div class="input-field col s12 blue lighten-5" id='quesimg'>
+            </div>
+              <div class="input-field col s12 blue lighten-5" id='demo'>
+              </div>
+              <div id="answer">
+                </div>
+            </div>
+          <!-- <div class="col-3"></div>
+          <div  class="col-9"> -->
+            <!-- <div class="col-md-3 "></div> -->
+              
+            <br>
+        <!-- </div> -->
+        <div class="col-md-3"></div>
+        <div class="col-md-8">
+          <br>
+            <button class="waves-effect waves-light btn" onclick="myFunctionnext()">next question</button>  
+            <button class="waves-effect waves-light btn" onclick="myFunctionprv()">previous question</button>  
+        </div>
+        <div class="col-md-1">
+          <br>
+            <button style="margin-left: -39px;" class="waves-effect waves-light btn" onclick="mysubmit()">End Test</button>
+        </div>
+        </div>  
+    </div>
+    <div class="container" style="background-color: brown">
+    </div>
+<script>
+var i='{{intro[0].time}}';
+var z = '{{intro[0].time_duration}}'
+var s = i.split(':')
+var d = z.split(':')
+var t = parseInt(s[0])+parseInt(d[0]) 
+var t1 = parseInt(s[1])+parseInt(d[1])
+if (parseInt(t1)>59){
+  t=t+1;
+  t1 = t1-59;
+}
+var tt = String( t)+':'+String (t1)
+var time_duration =(60* parseInt(d[0]))+ parseInt(d[1])
+function startTimer(duration, display) {
+    var timer = duration, minutes, seconds;
+    setInterval(function () {
+        
+        minutes = parseInt(timer / 60, 10)
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.text("Time left : "+minutes + ":" + seconds);
+
+        if (--timer < 0) {
+            localStorage.removeItem("mytime"); 
+            mysubmit()  
+          }
+        localStorage.setItem("mytime", minutes);
+        localStorage.setItem("mytimesec", seconds);
+    }, 1000);
+}
+
+jQuery(function ($) {
+    var fiveMinutes = 60 * time_duration,
+        display = $('#time');
+        var x = 0;
+        if (x!=0){
+          fiveMinutes= 60*x;
+        } 
+        localStorage.setItem("mytime", fiveMinutes);
+    startTimer(fiveMinutes, display);
+});
+
+var list='{{questions|safe}}';
+var t = JSON.parse(list)
+var text =""
+for (var i=0;i<t.length;i++){
+    text += "<li class='list-group-item blue lighten-5'>"+(i+1)+". "+t[i]['question']+" </li>";
+}
+document.getElementById('questionlist').innerHTML=text
+
+  var list='{{questions|safe}}';
+  var t = JSON.parse(list)
+  var answer = []
+  console.log((t[0]['imgfilename']));
+  var i=0;
+  if (t[i]['question_type']=='MCQ'){
+    text =  "<br> <p>"+t[i]['question']+"</p><br>" +"<p> 1."+t[i]['opt1']+"</p><br>"+"<p> 2."+t[i]['opt2']+"</p><br>"+"<p> 3."+t[i]['opt3']+"</p><br>"+"<p> 4."+t[i]['opt4']+"</p><br><br><br>";
+    text1 = "<br><select id='qanswer' name='timezone' name='timezone' class='browser-default'><option value='opt0'>-----</option><option value='opt1'>Option 1</option><option value='opt2'>Option 2</option><option value=opt3>Option 3</option><option value='opt4'>Option 4</option></select><br><br>"
+    document.getElementById("answer").innerHTML = text1;
+    document.getElementById("demo").innerHTML = text;
+    var  mg = t[i]['imgfilename'];
+    img1 = '<img src="{{url_for("static", filename='+ mg +')}}" />'
+    img = '<img src="/static/images/'+ t[i]['imgfilename'] +'">'
+    console.log(img1)
+    document.getElementById("quesimg").innerHTML = img;
+    
+    }
+    else{
+    text =  "<br> <p>"+t[i]['question']+"</p><br>";
+    document.getElementById("demo").innerHTML = text;
+    text1 = "<br><textarea id='qanswer' class='materialize-textarea' data-length='120'></textarea><label for='textarea2'>Answer</label><br><br>"
+    document.getElementById("answer").innerHTML = text1;
+    img = '<img src="/static/images/'+ t[i]['imgfilename'] +'">'
+    document.getElementById("quesimg").innerHTML = img;
+    }
+    myanswer();
+  function myFunctionnext() {
+    i=i+1;
+    if (t[i]['question_type']=='MCQ'){
+    text =  "<br> <p>"+t[i]['question']+"</p><br>" +"<p> 1."+t[i]['opt1']+"</p><br>"+"<p> 2."+t[i]['opt2']+"</p><br>"+"<p> 3."+t[i]['opt3']+"</p><br>"+"<p> 4."+t[i]['opt4']+"</p><br><br><br>";
+    document.getElementById("demo").innerHTML = text;
+    text1 = "<br><select id='qanswer' name='timezone' name='timezone' class='browser-default'><option value='opt0'>-----</option><option value='opt1'>Option 1</option><option value='opt2'>Option 2</option><option value=opt3>Option 3</option><option value='opt4'>Option 4</option></select><br><br>"
+    document.getElementById("answer").innerHTML = text1;
+    img = '<img src="/static/images/'+ t[i]['imgfilename'] +'">'
+    document.getElementById("quesimg").innerHTML = img;
+    document.getElementById("qanswer").value = answer[i];
+    }
+    else{
+      text =  "<br> <p>"+t[i]['question']+"</p><br><br><br>";
+    document.getElementById("demo").innerHTML = text;
+    text1 = "<br><textarea id='qanswer' class='materialize-textarea' data-length='120'></textarea><label for='textarea2'>Answer</label><br><br>"
+    document.getElementById("answer").innerHTML = text1;
+    img = '<img src="/static/images/'+ t[i]['imgfilename'] +'">'
+    document.getElementById("quesimg").innerHTML = img;
+    document.getElementById("qanswer").value = answer[i];
+    }
+    myanswer();
+  }
+  function myFunctionprv() {
+    i=i-1;
+    if (t[i]['question_type']=='MCQ'){
+    text =  "<br> <p>"+t[i]['question']+"</p><br>" +"<p> 1."+t[i]['opt1']+"</p><br>"+"<p> 2."+t[i]['opt2']+"</p><br>"+"<p> 3."+t[i]['opt3']+"</p><br>"+"<p> 4."+t[i]['opt4']+"</p><br><br><br>";
+    text1 = "<br><select id='qanswer' name='timezone' name='timezone' class='browser-default'><option value='opt0'>-----</option><option value='opt1'>Option 1</option><option value='opt2'>Option 2</option><option value=opt3>Option 3</option><option value='opt4'>Option 4</option></select><br><br>"
+    document.getElementById("answer").innerHTML = text1;
+    document.getElementById("demo").innerHTML = text;
+    img = '<img src="/static/images/'+ t[i]['imgfilename'] +'">'
+    document.getElementById("quesimg").innerHTML = img;
+    document.getElementById("qanswer").value = answer[i];
+    }
+    else{
+    text =  "<br> <p>"+t[i]['question']+"</p><br><br><br>";
+    document.getElementById("demo").innerHTML = text;
+    text1 = "<textarea id='qanswer' class='materialize-textarea' data-length='120'></textarea><label for='textarea2'>Answer</label><br><br>"
+    document.getElementById("answer").innerHTML = text1;
+    img = '<img src="/static/images/'+ t[i]['imgfilename'] +'">'
+    document.getElementById("quesimg").innerHTML = img;
+    document.getElementById("qanswer").value = answer[i];
+    }
+    myanswer();
+  }
+  
+  
+    
+    for (var z=0;z<t.length;z++){
+      answer.push(" ")
+    }
+    function myanswer(){
+    var inputElement = document.getElementById('qanswer');   
+    var theirInput = '';
+    inputElement.addEventListener('change', function(e) {
+        theirInput = e.target.value; 
+        // alert(theirInput)
+        answer.splice(i, 1);
+        answer.splice(i,0,theirInput)
+      }); 
+    
+    console.log(answer)
+  }
+  
+
+  function mysubmit(){
+    fetch('/receiver', {
+          method: 'POST',
+          body: JSON.stringify(answer),
+          headers: new Headers({
+            'content-type':'application/json'
+          })
+          }).then(function (response) { // At this point, Flask has printed our JSON
+    return response.text();
+}).then(function (text) {
+
+  window.location.href = "{{url_for('result')}}";
+});  
+  }
+
+  
+</script>
+     {% endblock %}

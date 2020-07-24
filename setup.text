@@ -1,0 +1,27 @@
+All Url : 
+For STUDENT:
+    1 : http://<yourweblink>/ : Home page
+    2 : http://<yourweblink>/taketest : TakeTest
+    3 : http://<yourweblink>/questions : Question after exam start
+    4 : http://<yourweblink>/result : Show Grade 
+    5 : http://<yourweblink>/feedback : submit feedback
+
+For TEACHER:
+    1 : http://<yourweblink>/ : Home page
+    2 : http://<yourweblink>/hosttest : HostTest
+    3 : http://<yourweblink>/addquestion : Question add for exam
+    4 : http://<yourweblink>/submit  : Get You exam ID 
+    5 : http://<yourweblink>/feedback : submit feedback
+    6 : http://<yourweblink>/answersheet : For checking the sheet of students
+
+For ADMIN :
+    1 : http://<yourweblink>/showfeedback : reading all the feedback of the user
+
+
+
+
+
+<----------SETUP at your local System------>
+1 : Install python at your system
+2 : Install all the requirements for requirements.txt file
+3 : run python app.py to start the server at your local system

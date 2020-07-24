@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container">
+      
+      <h4 class="header center orange-text">Take Test</h4>
+      <div class="row center">
+        
+      </div>
+      <div class="row ">
+        <form class="col s12" method="POST" action="{{url_for('taketest')}}">
+          <div class="row center">
+              
+                <div class="input-field col s12">
+                    <input placeholder="Enter your Test ID. " name="examid" id="testid" type="text" >
+                    <label for="test_id">Test ID</label>
+                </div>
+                <div class="input-field col s12">
+                    <input placeholder="Enter your Name. " name="name" id="name" type="text" required>
+                    <label for="test_id">Name</label>
+                </div>
+                <div class="input-field col s12">
+                    <input placeholder="Enter your Roll NO. " name="rollno" id="emailid" type="text" required>
+                    <label for="test_id">Roll no.</label>
+                </div>
+                <div class="input-field col s12">
+                    <input placeholder="Enter your branch ID. " name="branch" id="emailid" type="text" >
+                    <label for="test_id">Branch ID</label>
+                </div>
+                <br>
+                
+                  
+          </div>
+          
+          <br><br>
+          <input class="waves-effect waves-light btn" type="submit" value='Start Test'>
+        </form>
+      </div>
+      <br><br>
+
+    </div>
+  </div>
+
+
+  <div class="container">
+    <div class="section">
+            
+            
+    </div>
+    <br>
+    <br><br>
+    {% endblock %}
