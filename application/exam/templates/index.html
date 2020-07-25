@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container">
+      <br><br>
+      <div class="row center">
+        <h5 class="header col s12 light"></h5>
+      </div>
+      <div class="row center">
+        <a href="{{url_for('exam')}}" id="download-button" class="btn-large waves-effect waves-light orange">Host Test</a>
+        <a href="{{url_for('taketest')}}" id="download-button" class="btn-large waves-effect waves-light orange"style="margin-left: 55px;">Take Test</a>
+      </div>
+      <br><br>
+
+    </div>
+  </div>
+
+
+  <div class="container">
+    <div class="section">
+      <ul class="collapsible">
+        <li class="active">
+          <div class="collapsible-header"><b>How to Use</b></div>
+          <div class="collapsible-body">
+            <div>
+              <h6><u>If you want to host a Exam</u></h6>
+              Step 1: Click on the button <button id="download-button" class="btn-large waves-effect waves-light orange">Host Test</button> then you will land to the Host text page.<br>
+              Step 2: Fill the form with all the deteils and Click Submit and then you land to Add Questions Page. <br>
+              Step 3: Add Question deteils for the question if you have any Images related you can add, then you click Add Question button.<br>
+              Step 4: Repeat until all Question added you can you all question under you form.<br>
+              Step 5: Click Submit Done <i>Happy Teaching</i>!!<br>
+              Step 6: Share the link to your Students 
+              <br>
+            </div>
+          </div>
+        </li>
+        
+      </ul>
+      <!--   Icon Section   -->
+      <div class="row">
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center light-blue-text"><i class="material-icons">flash_on</i></h2>
+            <h5 class="center">Speeds up Test System</h5>
+
+            <p class="light">Host yore test very easly and check your answer sheet.</p>
+          </div>
+        </div>
+
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center light-blue-text"><i class="material-icons">group</i></h2>
+            <h5 class="center">User Experience Focused</h5>
+
+            <p class="light">Our Focused is to make your Experience very stressless just you need to create your questions. And everything is on us</p>
+          </div>
+        </div>
+
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center light-blue-text"><i class="material-icons">settings</i></h2>
+            <h5 class="center">Easy to work with</h5>
+
+            <p class="light">We taking care of everything for you test Experience.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <br><br>
+    <script>
+    var fiveMinutes = 0
+  localStorage.setItem("mytime", fiveMinutes);
+  localStorage.setItem("inttime", fiveMinutes);
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.collapsible');
+    var instances = M.Collapsible.init(elems, options);
+  });
+
+  // Or with jQuery
+
+  $(document).ready(function(){
+    $('.collapsible').collapsible();
+  });
+    </script>
+    {% endblock %}
