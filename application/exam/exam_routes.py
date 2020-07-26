@@ -19,7 +19,8 @@ from flask import Blueprint, render_template
 # Blueprint Configuration
 exams_bp = Blueprint('exam_bp',__name__,
                     template_folder='templates',
-                    static_folder='static'
+                    static_folder='static',
+                    url_prefix='/'
                     )
 IMAGE_DIR = 'application/exam/static/images'
 def randstr():
