@@ -11,8 +11,8 @@ def create_app():
     db.init_app(app)
     
     with app.app_context():
-        from .exam import exam_routes
+        from .exam.exam_routes import exams
         from .auth import auth_routes
-        app.register_blueprint(exam_routes.exams_bp)
+        app.register_blueprint(exams)
         db.create_all()
         return app

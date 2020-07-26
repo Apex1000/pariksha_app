@@ -18,17 +18,17 @@
             <tbody>
               {%for i in answersheet%}
               <tr>
-                <td><a href="{{url_for('answers',id=i.rollno)}}"> {{i.rollno}} </a></td>
+                <td><a href="{{url_for('exams.answers',id=i.rollno)}}"> {{i.rollno}} </a></td>
                 <td>{{i.student_name}}</td>
                 <td>{{i.branch}}</td>
-                <td><a href="{{url_for('answers',id=i.rollno)}}"><button style="margin-left: -39px;" class="waves-effect waves-light btn" >Show</button></a></td>
+                <td><a href="{{url_for('exams.answers',id=i.rollno)}}"><button style="margin-left: -39px;" class="waves-effect waves-light btn" >Show</button></a></td>
               </tr>
               {%endfor%}
             </tbody>
           </table>
       </div>
       <div class="row ">
-        <a href="{{url_for('submit')}}"><button style="margin-left: -39px;" class="waves-effect waves-light btn" >Exit</button>  </a>
+        <a href="{{url_for('exams.submit')}}"><button style="margin-left: -39px;" class="waves-effect waves-light btn" >Exit</button>  </a>
       </div>
       <br><br>
 

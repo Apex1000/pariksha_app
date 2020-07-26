@@ -32,14 +32,14 @@
 </head>
 <body>
   <nav class="light-blueg lighten-1" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="{{url_for('index')}}" class="brand-logo">Parikshaa</a>
+    <div class="nav-wrapper container"><a id="logo-container" href="{{url_for('exams.index')}}" class="brand-logo">Parikshaa</a>
       <ul class="right hide-on-med-and-down">
         {% if session%}
         <li><a href="#">Exam ID : {{session['exam_id']}}</a></li>
         {%else%}
-        <li><a href="{{url_for('index')}}">Home</a></li>
-        <li><a href="{{url_for('answer')}}">Answer Sheet</a></li>
-        <li><a href="{{url_for('feedback')}}">Feedback</a></li>
+        <li><a href="{{url_for('exams.index')}}">Home</a></li>
+        <li><a href="{{url_for('exams.answer')}}">Answer Sheet</a></li>
+        <li><a href="{{url_for('exams.feedback')}}">Feedback</a></li>
         
         {% endif %}
         
@@ -49,9 +49,9 @@
           {% if session%}
         <li><a href="#">Exam ID : {{session['exam_id']}}</a></li>
         {%else%}
-        <li><a href="{{url_for('index')}}">Home</a></li>
-        <li><a href="{{url_for('answer')}}">Answer Sheet</a></li>
-        <li><a href="{{url_for('feedback')}}">Feedback</a></li>
+        <li><a href="{{url_for('exams.index')}}">Home</a></li>
+        <li><a href="{{url_for('exams.answer')}}">Answer Sheet</a></li>
+        <li><a href="{{url_for('exams.feedback')}}">Feedback</a></li>
         
         {% endif %}
         

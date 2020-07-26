@@ -91,7 +91,7 @@ function startTimer(duration, display) {
             localStorage.removeItem("inttime");
             if(flag){
             var foo = document.getElementById("start");
-            foo.innerHTML = foo.innerHTML + "<a href='{{url_for('questions')}}'><input class='waves-effect waves-light btn' type='submit' value='Start Your Exam'></a>";
+            foo.innerHTML = foo.innerHTML + "<a href='{{url_for('exams.questions')}}'><input class='waves-effect waves-light btn' type='submit' value='Start Your Exam'></a>";
             flag=false;
             }
           }
@@ -148,7 +148,7 @@ function countdownTimer1() {
   }
   if (remaining1 == "Time's up!"){
     alert('exam ended')
-    window.location.href = "{{url_for('index')}}";
+    window.location.href = "{{url_for('exams.index')}}";
   }
 }
 

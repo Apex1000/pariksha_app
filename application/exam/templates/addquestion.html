@@ -7,7 +7,7 @@
         
       </div>
       <div class="row ">
-        <form class="col s8" method="POST" action="{{url_for('addquestion')}}" enctype="multipart/form-data">
+        <form class="col s8" method="POST" action="{{url_for('exams.addquestion')}}" enctype="multipart/form-data">
           <div class="row center">
                 <div class="input-field col s12">
                                 <p>
@@ -105,6 +105,6 @@
                   </table>
     </div>
     <br>
-    <a style="align-content: center" href="{{url_for('submit')}}"><input class="waves-effect waves-light btn" type="submit" value='Submit'></a>
+    <a style="align-content: center" href="{{url_for('exams.submit')}}"><input class="waves-effect waves-light btn" type="submit" value='Submit'></a>
     <br><br>
     {% endblock %}

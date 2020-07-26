@@ -187,7 +187,7 @@ document.getElementById('questionlist').innerHTML=text
     return response.text();
 }).then(function (text) {
 
-  window.location.href = "{{url_for('result')}}";
+  window.location.href = "{{url_for('exams.result')}}";
 });  
   }
 

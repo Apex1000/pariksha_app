@@ -17,10 +17,9 @@ from werkzeug.utils import secure_filename
 from flask import Blueprint, render_template
 
 # Blueprint Configuration
-exams_bp = Blueprint('exam_bp',__name__,
+exams = Blueprint('exams',__name__,
                     template_folder='templates',
-                    static_folder='static',
-                    url_prefix='/'
+                    static_folder='static'
                     )
 IMAGE_DIR = 'application/exam/static/images'
 def randstr():
@@ -47,7 +46,7 @@ def convertjson(data):
         l.append(data)
     return (simplejson.dumps(l))
 
-@exams_bp.route('/receiver', methods=['POST','GET'])
+@exams.route('/receiver', methods=['POST','GET'])
 def receiver():
      # POST request
     if request.method == 'POST':
@@ -86,7 +85,7 @@ def receiver():
         message = {'greeting':'Hello from Flask!'}
         print (jsonify(message))  # serialize and use JSON headers
     
-@exams_bp.route('/answersheet', methods=['POST','GET'])
+@exams.route('/answersheet', methods=['POST','GET'])
 def answer():
     if request.method == 'POST':
         examid = request.form['test']
@@ -111,7 +110,7 @@ def answer():
         else:
             return render_template('answersheet.html')
 
-@exams_bp.route('/answersheet/<id>', methods=['POST','GET'])
+@exams.route('/answersheet/<id>', methods=['POST','GET'])
 def answers(id):
     examid = session['exam_id']
     question = Questionss.query.filter_by(exam_id=examid).all()
@@ -124,13 +123,13 @@ def answers(id):
         
         return render_template('late.html')    
 
-@exams_bp.route('/')
+@exams.route('/')
 def index():
     if (session):
         session.clear()    
     return render_template('index.html')
 
-@exams_bp.route('/exam', methods=['POST','GET'])
+@exams.route('/exam', methods=['POST','GET'])
 def exam():
     if request.method == 'POST':
         x = uuid.uuid1()
@@ -159,7 +158,7 @@ def exam():
 
     return render_template('hosttest.html')
 
-@exams_bp.route('/addquestion',methods=['POST','GET'])
+@exams.route('/addquestion',methods=['POST','GET'])
 def addquestion():
     if request.method == 'POST':
         exam_id = session['exam_id']
@@ -192,20 +191,20 @@ def addquestion():
     data = Questionss.query.filter_by(exam_id=examid).all()
     return render_template('addquestion.html',form = data)
 
-@exams_bp.route('/result')
+@exams.route('/result')
 def result():
     examid = session['exam_id']
     grade = session['grade'] 
     session.clear()
     return render_template('result.html',ExamID=examid,grade = grade)
 
-@exams_bp.route('/submit')
+@exams.route('/submit')
 def submit():
     examid = session['exam_id']
     session.clear()
     return render_template('submit.html',ExamID=examid)
 
-@exams_bp.route('/taketest',methods=['POST','GET'])
+@exams.route('/taketest',methods=['POST','GET'])
 def taketest():
     if request.method == 'POST':
         examid = int(request.form['examid'])
@@ -220,7 +219,7 @@ def taketest():
         return redirect(url_for('instructions'))
     return render_template('taketest.html')
 
-@exams_bp.route('/taketest/<id>',methods=['POST','GET'])
+@exams.route('/taketest/<id>',methods=['POST','GET'])
 def taketests(id):
     if request.method == 'POST':
         examid = int(request.form['examid'])
@@ -236,7 +235,7 @@ def taketests(id):
     
     return render_template('taketest.html',ID=id)
 
-@exams_bp.route('/instructions',methods=['POST','GET'])
+@exams.route('/instructions',methods=['POST','GET'])
 def instructions():
     if session:
         examid = int(session['test_id'])
@@ -258,7 +257,7 @@ def instructions():
         print(count)
         return render_template('instructions.html',intro = intro,count=count+hours)
 
-@exams_bp.route('/questions',methods=['POST','GET'])
+@exams.route('/questions',methods=['POST','GET'])
 def questions():
     # print(datetime.date(datetime.now()))
     # print(datetime.time(datetime.now()))
@@ -287,17 +286,17 @@ def questions():
     else:
         return redirect(url_for('taketest'))
 
-@exams_bp.route('/endtest')
+@exams.route('/endtest')
 def endtest():
     session.clear()
     return redirect(url_for('index'))
 
-@exams_bp.route('/display/<filename>')
+@exams.route('/display/<filename>')
 def display_image(filename):
 	#print('display_image filename: ' + filename)
 	return redirect(url_for('static', filename='images/' + filename), code=301)
 
-@exams_bp.route('/feedback',methods=['POST','GET'])
+@exams.route('/feedback',methods=['POST','GET'])
 def feedback():
     if request.method == 'POST':
         name = request.form['name']
@@ -309,7 +308,7 @@ def feedback():
     else:
         return render_template('feedback.html')
 
-@exams_bp.route('/showfeedback',methods=['POST','GET'])
+@exams.route('/showfeedback',methods=['POST','GET'])
 def showfeedback():
     feedback = Feedback.query.all()
     return render_template('showfeedback.html',feedback=feedback)
