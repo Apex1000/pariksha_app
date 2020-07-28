@@ -12,7 +12,9 @@ def create_app():
     
     with app.app_context():
         from .exam.exam_routes import exams
+        from .admin.admin_routes import admins
         from .auth import auth_routes
         app.register_blueprint(exams)
+        app.register_blueprint(admins)
         db.create_all()
         return app

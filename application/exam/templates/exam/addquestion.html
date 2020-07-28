@@ -1,0 +1,110 @@
+{% extends "./exam/base.html" %}
+{% block content %}
+    <div class="container">
+      
+      <h4 class="header center orange-text">Add Questions</h4>
+      <div class="row center">
+        
+      </div>
+      <div class="row ">
+        <form class="col s8" method="POST" action="{{url_for('exams.addquestion')}}" enctype="multipart/form-data">
+          <div class="row center">
+                <div class="input-field col s12">
+                                <p>
+                                <label style="margin-right: 10px">
+                                  <input name="question_type" type="radio" value="MCQ"  />
+                                  <span>MCQ</span>
+                                </label>
+                              
+                                <label>
+                                  <input name="question_type" type="radio" value="Descriptive" />
+                                  <span>Descriptive</span>
+                                </label>
+                        </p>
+
+                        
+                </div>  
+                <div class="input-field col s12">
+                    <input placeholder="Question" name="question" id="question" type="text" class="validate">
+                    <label for="first_name">Question Name</label>
+                </div>
+                <div id="group-file" class="form-group col s12"  >
+                    <span style="margin-right: 90px;">Question Image</span>  
+                  	<input type="file" name="file" autocomplete="off" >
+                    
+                </div>
+                <br><br><br><br>
+                <br><br><br><br>
+                <div class="input-field col s3">
+                        <input placeholder="MCQ Option 1" name="opt1" id="question" type="text" class="validate">
+                        <label for="first_name">MCQ Option 1</label>
+                </div>
+                <div class="input-field col s3">
+                        <input placeholder="MCQ Option 2" name="opt2" id="question" type="text" class="validate">
+                        <label for="first_name">MCQ Option 2</label>
+                </div>
+                <div class="input-field col s3">
+                        <input placeholder="MCQ Option 3" name="opt3" id="question" type="text" class="validate">
+                        <label for="first_name">MCQ Option 3</label>
+                </div>
+                <div class="input-field col s3">
+                        <input placeholder="MCQ Option 4" name="opt4" id="question" type="text" class="validate">
+                        <label for="first_name">MCQ Option 4</label>
+                </div> 
+                <div class="input-field col s4">
+                    <label for="timezone"></label>
+                  <select name="mcqans" name="mcqans"  class="browser-default">
+                    <option value="opt1">Option 1</option>
+                    <option value="opt2">Option 2</option>
+                    <option value="opt3">Option 3</option>
+                    <option value="opt4">Option 4</option>
+                    </select>
+                    </div>   
+                <div class="input-field col s4">
+                    <input placeholder="Question Marks" name="marks" id="questionmarks" type="text" class="validate">
+                    <label for="first_name">Question Marks</label>
+                </div>
+                <div class="input-field col s4">
+                    <input placeholder="Negative Marks" name="negativemarks" id="negativemarks" type="text" class="validate">
+                    <label for="negativemarks">Negative Marks</label>
+                </div>
+                <br>
+          </div>
+          
+          <br><br>
+          <input class="waves-effect waves-light btn" type="submit" value='Add Question'>
+        </form>
+      </div>
+      <br><br>
+
+    </div>
+  </div>
+
+
+  <div class="container">
+    <div class="section">
+            
+            <table>
+                    <thead>
+                      <tr>
+                          <th>Question</th>
+                          <th>Marks</th>
+                          <th>Type</th>
+                      </tr>
+                    </thead>
+            
+                    <tbody>
+                      {%for i in form%}
+                      <tr>
+                        <td>{{i.question}}</td>
+                        <td>{{i.question_marks}}</td>
+                        <td>{{i.question_type}}</td>
+                      </tr>
+                      {%endfor%}
+                    </tbody>
+                  </table>
+    </div>
+    <br>
+    <a style="align-content: center" href="{{url_for('exams.submit')}}"><input class="waves-effect waves-light btn" type="submit" value='Submit'></a>
+    <br><br>
+    {% endblock %}

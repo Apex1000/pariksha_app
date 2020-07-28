@@ -94,7 +94,7 @@ def answer():
         # student = ses.query(AnswerSheet,Students).outerjoin(AnswerSheet, Students.rollno==AnswerSheet.rollno).all()
         # intro = AnswerSheet.query.filter_by(exam_id=examid).all()
         # print (student)
-        return render_template('sheet.html',answersheet = data)
+        return render_template('./exam/sheet.html',answersheet = data)
     else:
         if (session):
             examid = session['exam_id']
@@ -106,9 +106,9 @@ def answer():
             # # intro = AnswerSheet.query.filter_by(exam_id=examid).all()
             # print (student)
             
-            return render_template('sheet.html',answersheet = data)
+            return render_template('./exam/sheet.html',answersheet = data)
         else:
-            return render_template('answersheet.html')
+            return render_template('./exam/answersheet.html')
 
 @exams.route('/answersheet/<id>', methods=['POST','GET'])
 def answers(id):
@@ -118,16 +118,16 @@ def answers(id):
     # print(question)
     intro = AnswerSheet.query.filter_by(exam_id=examid,rollno=id).all()
     if(intro):
-        return render_template('answer.html', answer=intro,question=questions)
+        return render_template('./exam/answer.html', answer=intro,question=questions)
     else:
         
-        return render_template('late.html')    
+        return render_template('./exam/late.html')    
 
 @exams.route('/')
 def index():
     if (session):
         session.clear()    
-    return render_template('index.html')
+    return render_template('./exam/index.html')
 
 @exams.route('/exam', methods=['POST','GET'])
 def exam():
@@ -152,11 +152,11 @@ def exam():
         db.session.commit()
         if email!= re_email:
 
-            return redirect(url_for('exam'))
+            return redirect(url_for('exams.exam'))
         else:
-            return redirect(url_for('addquestion'))
+            return redirect(url_for('exams.addquestion'))
 
-    return render_template('hosttest.html')
+    return render_template('./exam/hosttest.html')
 
 @exams.route('/addquestion',methods=['POST','GET'])
 def addquestion():
@@ -186,23 +186,23 @@ def addquestion():
         # file.save(os.path.join(IMAGE_DIR,safefilename))
         db.session.add(question)
         db.session.commit()
-        return redirect(url_for('addquestion'))
+        return redirect(url_for('exams.addquestion'))
     examid = int(session['exam_id'])
     data = Questionss.query.filter_by(exam_id=examid).all()
-    return render_template('addquestion.html',form = data)
+    return render_template('./exam/addquestion.html',form = data)
 
 @exams.route('/result')
 def result():
     examid = session['exam_id']
     grade = session['grade'] 
     session.clear()
-    return render_template('result.html',ExamID=examid,grade = grade)
+    return render_template('./exam/result.html',ExamID=examid,grade = grade)
 
 @exams.route('/submit')
 def submit():
     examid = session['exam_id']
     session.clear()
-    return render_template('submit.html',ExamID=examid)
+    return render_template('./exam/submit.html',ExamID=examid)
 
 @exams.route('/taketest',methods=['POST','GET'])
 def taketest():
@@ -216,8 +216,8 @@ def taketest():
         db.session.commit()
         session['exam_id']= rollno
         session['test_id']= examid
-        return redirect(url_for('instructions'))
-    return render_template('taketest.html')
+        return redirect(url_for('exams.instructions'))
+    return render_template('./exam/taketest.html')
 
 @exams.route('/taketest/<id>',methods=['POST','GET'])
 def taketests(id):
@@ -231,9 +231,9 @@ def taketests(id):
         db.session.commit()
         session['exam_id']= rollno
         session['test_id']= examid
-        return redirect(url_for('instructions'))
+        return redirect(url_for('exams.instructions'))
     
-    return render_template('taketest.html',ID=id)
+    return render_template('./exam/taketest.html',ID=id)
 
 @exams.route('/instructions',methods=['POST','GET'])
 def instructions():
@@ -255,7 +255,7 @@ def instructions():
         hours = days*24
         print(hours)
         print(count)
-        return render_template('instructions.html',intro = intro,count=count+hours)
+        return render_template('./exam/instructions.html',intro = intro,count=count+hours)
 
 @exams.route('/questions',methods=['POST','GET'])
 def questions():
@@ -280,16 +280,16 @@ def questions():
         print(tm,time1[1])
         session['id'] = id
         # if(date == intro[0].date) and (th==int(time1[0]) and tm==int(time1[1])):
-        return render_template('question.html',questions = jsondata,intro = intro,z=z,t = question)
+        return render_template('./exam/question.html',questions = jsondata,intro = intro,z=z,t = question)
         # else:
         #     return redirect(url_for('instructions'))
     else:
-        return redirect(url_for('taketest'))
+        return redirect(url_for('exams.taketest'))
 
 @exams.route('/endtest')
 def endtest():
     session.clear()
-    return redirect(url_for('index'))
+    return redirect(url_for('exams.index'))
 
 @exams.route('/display/<filename>')
 def display_image(filename):
@@ -304,11 +304,11 @@ def feedback():
         feedback = Feedback(name = name, msg = msg)
         db.session.add(feedback)
         db.session.commit()
-        return redirect(url_for('index'))
+        return redirect(url_for('exams.index'))
     else:
-        return render_template('feedback.html')
+        return render_template('./exam/feedback.html')
 
 @exams.route('/showfeedback',methods=['POST','GET'])
 def showfeedback():
     feedback = Feedback.query.all()
-    return render_template('showfeedback.html',feedback=feedback)
+    return render_template('./exam/showfeedback.html',feedback=feedback)

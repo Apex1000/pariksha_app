@@ -1,0 +1,47 @@
+{% extends "./exam/base.html" %}
+{% block content %}
+    <div class="container">
+      
+      <h4 class="header center orange-text">Submit Feedback</h4>
+      <div class="row center">
+            <div class="input-field col s12">
+                    <table>
+                            <thead>
+                              <tr>
+                                  <th>Name</th>
+                                  <th>Message</th>
+                              </tr>
+                            </thead>
+                    
+                            <tbody>
+                              {%for i in feedback%}
+                              <tr>
+                                <td> {{i.name}}</td>
+                                <td>{{i.msg}}</td>
+                              </tr>
+                              {%endfor%}
+                            </tbody>
+                          </table>
+            </div>
+        <div class="input-field col s12">
+            
+          </div>
+      </div>
+      <div class="row center">
+         
+      </div>
+      <br><br>
+
+    </div>
+  </div>
+
+
+  <div class="container">
+    <div class="section">
+           
+    
+        
+    </div>
+    <br><br>
+    
+    {% endblock %}

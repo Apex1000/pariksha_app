@@ -1,0 +1,117 @@
+{% extends "./exam/base.html" %}
+{% block content %}
+<div class="container">
+    <div id="countdown" class=" center countdown" style="background-color: rgb(237, 248, 220); font-size: 30px"> Exam Start In : </div>
+      <!-- <h4 class="header center orange-text">Take Test</h4> -->
+      <div class="row">
+          
+          <div class="col-sm-12 blue lighten-5">
+            <br><br>  
+            <h5><b><p>Exam Details</p></b></h5>
+            <p>Exam Name: {{intro[0].exam_name}}</p>
+            <p>Teacher Name: {{intro[0].teacher_name}}</p>
+            <p>Exam instructions: {{intro[0].intro}}</p>
+            <p>Time Durations : {{intro[0].time_duration}} Hours </p>
+          <br>
+          </div>
+          
+             <div class="col-sm-9 start" id="start">
+                    <br>
+            </div>
+          </div>
+          
+
+        </div>
+        <br> <br><br><br><br><br> 
+    <div class="container" style="background-color: brown">
+       
+    </div>
+<script>
+  var fiveMinutes =0;
+  localStorage.setItem("mytime", fiveMinutes);
+  let remaining = "Time's up!";
+  var flag=true
+
+var time_duration = parseInt('{{count}}')
+function startTimer(duration, display) {
+    var timer = duration, minutes, seconds;
+    setInterval(function () {
+        // console.log(timer)
+        
+        minutes = parseInt(timer / 60, 10)
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.text("Time left : "+minutes + ":" + seconds);
+
+        if (--timer < 0) {
+            localStorage.removeItem("inttime");
+            if(flag){
+            var foo = document.getElementById("start");
+            foo.innerHTML = foo.innerHTML + "<a href='{{url_for('exams.questions')}}'><input class='waves-effect waves-light btn' type='submit' value='Start Your Exam'></a>";
+            flag=false;
+            }
+          }
+        localStorage.setItem("inttime", minutes);
+        localStorage.setItem("mytimesec", seconds);
+    }, 1000);
+}
+
+jQuery(function ($) {
+    var fiveMinutes = 60 * time_duration,
+        display = $('#countdown');
+        var x = 0;
+        if (x!=0){
+          fiveMinutes= 60*x;
+          console.log(x)
+        } 
+        localStorage.setItem("inttime", fiveMinutes);
+    startTimer(fiveMinutes, display);
+});
+
+var i='{{intro[0].time}}';
+var z = '{{intro[0].time_duration}}'
+var s = i.split(':')
+var d = z.split(':')
+var t = parseInt(s[0])+parseInt(d[0]) 
+var t1 = parseInt(s[1])+parseInt(d[1])
+if (parseInt(t1)>59){
+  t=t+1;
+  t1 = t1-59;
+}
+var tt = String( t)+':'+String (t1)
+
+console.log(tt)
+
+
+function countdownTimer1() {
+  const difference1 = +new Date("{{intro[0].date}} "+ tt +"") - +new Date();
+  let remaining1 = "Time's up!";
+
+  if (difference1 > 0) {
+    const parts = {
+      days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+      hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+      minutes: Math.floor((difference / 1000 / 60) % 60),
+      seconds: Math.floor((difference / 1000) % 60)
+    };
+
+    remaining1 = Object.keys(parts)
+      .map(part => {
+        if (!parts[part]) return;
+        return `${parts[part]} ${part}`;
+      })
+      .join(" ");
+  }
+  if (remaining1 == "Time's up!"){
+    alert('exam ended')
+    window.location.href = "{{url_for('exams.index')}}";
+  }
+}
+
+countdownTimer1();
+
+</script>
+    {% endblock %}

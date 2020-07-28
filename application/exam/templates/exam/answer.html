@@ -1,0 +1,71 @@
+{% extends "./exam/base.html" %}
+{% block content %}
+    <div class="container">
+      
+      <h4 class="header center orange-text">Answer Sheet</h4>
+      <p> <b>Grade : {{answer[0].grade|safe}}</b></p>
+      
+      <div class="row center" id="answer">
+        
+      </div>
+      <div class="row ">
+        
+        
+          <table>
+
+          </table>
+      </div>
+      <br><br>
+      <ol id='list'></ol>
+    </div>
+
+
+    <div class="container" id="table" name="table">
+        <div class="section">
+          <a href="{{url_for('exams.answer')}}"><button style="margin-left: -39px;" class="waves-effect waves-light btn" >Back To All Students</button>  </a>  
+          <!-- <input type="button" value="Generate a table." onclick="generate_table()"> -->
+        </div>
+    </div>
+    <br><br>
+
+<script>
+var answer = '{{answer[0].answer|safe}}';
+var answer = answer.replace(/[\[\]&]+/g, '');
+var question = '{{question|safe}}';
+var t = JSON.parse(question)
+var x = answer.split(',')
+
+
+for (var i = 0; i < t.length; i++) {
+  user = 'Questions: '+(i+1);
+  img = '<img src="/static/images/'+ t[i]['imgfilename'] +'">'
+  console.log(img)
+  if (t[i]['question_type']=='MCQ'){
+        text =  ''+t[i]['question']+' ' +' 1.'+t[i]['opt1']+' '+' 2.'+t[i]['opt2']+' '+' 3.'+t[i]['opt3']+' '+' 4.'+t[i]['opt4'];
+        }
+    else{
+        text =  ''+t[i]['question']+'';
+        }
+  rows = `<tr><td>${text}</td><td>Answer: ${x[i]}</td></tr>
+             
+          <tr><td>${img}</td><td></td></tr>`;
+
+  user = `<li>
+       <div style='font-size:20px'>${user}</div>
+       <table>
+         ${rows}
+        </table>
+      
+      </li>`;
+
+  /* Unlike innerHTML, insertAdjacentHTML doesn't overwrite
+  || content. It will insert strings:
+  - in front of an element.........: "beforebegin"
+  - inside an element as 1st child.: "afterbegin"
+  - inside an element as last child: "beforeend"
+  - behind an element..............: "afterend"
+  */
+  document.getElementById('list').insertAdjacentHTML('beforeend', user);
+}
+</script>
+{% endblock %}

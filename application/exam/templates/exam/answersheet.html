@@ -1,0 +1,37 @@
+{% extends "./exam/base.html" %}
+{% block content %}
+    <div class="container">
+      
+      <h4 class="header center orange-text">Answer Sheet</h4>
+      <div class="row center">
+        
+      </div>
+      <div class="row ">
+        <form class="col s12" method="POST" action="{{url_for('exams.answer')}}" enctype="multipart/form-data">
+          <div class="row center">
+                  
+                <div class="input-field col s12">
+                    <input placeholder="Test ID" name="test" id="testid" type="text">
+                    <label for="first_name"> Test ID</label>
+                </div>
+                
+                <br>
+                
+                  
+          </div>
+          
+          <br><br>
+          <input class="waves-effect waves-light btn" type="submit" value='Submit'>
+        </form>
+      </div>
+      <br><br>
+
+    </div>
+  </div>
+
+
+  <div class="container">
+            
+            
+    </div>
+    {% endblock %}
