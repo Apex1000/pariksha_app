@@ -31,6 +31,14 @@ def dashboard():
 def students():
     return render_template('admin/students.html',title='Pariksha-Admin')
 
+@admin.route('/newstudent')
+def newstudent():
+    return render_template('admin/newstudent.html',title='Pariksha-Admin')
+
 @admin.route('/teachers')
 def teachers():
     return render_template('admin/teachers.html',title='Pariksha-Admin')
+
+@admin.route('/newteacher')
+def newteacher():
+    return render_template('admin/newteacher.html',title='Pariksha-Admin')
