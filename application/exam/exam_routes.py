@@ -161,25 +161,35 @@ def exam():
 @exams.route('/addquestion',methods=['POST','GET'])
 def addquestion():
     if request.method == 'POST':
-        exam_id = session['exam_id']
         question_type = request.form['question_type']
-        question = request.form['question']
-        file = request.files['file']
-        opt1 = request.form['opt1']
-        opt2 = request.form['opt2']
-        opt3 = request.form['opt3']
-        opt4 = request.form['opt4']
-        mcqans = request.form['mcqans']
-        marks = request.form['marks']
-        nagativemarks = request.form['negativemarks']
-        filename = secure_filename(file.filename)
-        
-        safefilename = secure_filename(randstr() + '-' + file.filename)
-        file.save(os.path.join(IMAGE_DIR,safefilename))
         if question_type == 'Descriptive':
+            exam_id = session['exam_id']
+            
+            question = request.form['dquestion']
+            file = request.files['dfile']
+            marks = request.form['dmarks']
+            filename = secure_filename(file.filename)
+            
+            safefilename = secure_filename(randstr() + '-' + file.filename)
+            file.save(os.path.join(IMAGE_DIR,safefilename))
             question = Questionss(exam_id=exam_id,question_type=question_type,
-                                    question=question,question_photo=file.read(),question_marks=marks,imgfilename=safefilename,nagativemarks=nagativemarks)
+                                    question=question,question_photo=file.read(),question_marks=marks,imgfilename=safefilename)
         else:
+            exam_id = session['exam_id']
+            question_type = request.form['question_type']
+            question = request.form['question']
+            file = request.files['file']
+            opt1 = request.form['opt1']
+            opt2 = request.form['opt2']
+            opt3 = request.form['opt3']
+            opt4 = request.form['opt4']
+            mcqans = request.form['mcqans']
+            marks = request.form['marks']
+            nagativemarks = request.form['negativemarks']
+            filename = secure_filename(file.filename)
+            
+            safefilename = secure_filename(randstr() + '-' + file.filename)
+            file.save(os.path.join(IMAGE_DIR,safefilename))
             question = Questionss(exam_id=exam_id,question_type=question_type,question=question,
                                     question_photo=file.read(),opt1=opt1,opt2=opt2,opt3=opt3,
                                     opt4=opt4,mcqans=mcqans,question_marks=marks,imgfilename=safefilename,nagativemarks=nagativemarks)

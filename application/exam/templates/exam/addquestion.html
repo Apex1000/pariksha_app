@@ -1,6 +1,29 @@
 {% extends "./exam/base.html" %}
 {% block content %}
-    <div class="container">
+<style>
+  .box{
+      /* color: rgb(7, 6, 6); */
+      padding: 20px;
+      display: none;
+      margin-top: 20px;
+  }
+  .red{ background: #ff0000; }
+  .green{ background: #228B22; }
+  .blue{ background: #0000ff; }
+  label{ margin-right: 15px; }
+</style>
+<script>
+    
+  $(document).ready(function(){
+      $('input[type="radio"]').click(function(){
+          var inputValue = $(this).attr("value");
+          var targetBox = $("." + inputValue);
+          $(".box").not(targetBox).hide();
+          $(targetBox).show();
+      });
+  });
+  </script>
+<div class="container">
       
       <h4 class="header center orange-text">Add Questions</h4>
       <div class="row center">
@@ -8,22 +31,19 @@
       </div>
       <div class="row ">
         <form class="col s8" method="POST" action="{{url_for('exams.addquestion')}}" enctype="multipart/form-data">
-          <div class="row center">
-                <div class="input-field col s12">
-                                <p>
-                                <label style="margin-right: 10px">
-                                  <input name="question_type" type="radio" value="MCQ"  />
-                                  <span>MCQ</span>
-                                </label>
-                              
-                                <label>
-                                  <input name="question_type" type="radio" value="Descriptive" />
-                                  <span>Descriptive</span>
-                                </label>
-                        </p>
-
-                        
-                </div>  
+          <div class="input-field col s12 center">
+            <p>
+                    <label style="margin-right: 10px">
+                      <input name="question_type" type="radio" value="MCQ"  />
+                      <span>MCQ</span>
+                    </label>
+                    <label>
+                      <input name="question_type" type="radio" value="Descriptive" />
+                      <span>Descriptive</span>
+                    </label>
+            </p>  
+    </div>
+          <div class="MCQ box row center" active>  
                 <div class="input-field col s12">
                     <input placeholder="Question" name="question" id="question" type="text" class="validate">
                     <label for="first_name">Question Name</label>
@@ -70,13 +90,33 @@
                 </div>
                 <br>
           </div>
-          
+          <div class="Descriptive box row center">  
+            <div class="input-field col s12">
+                <input placeholder="Question" name="dquestion" id="question" type="text" class="validate">
+                <label for="first_name">Question Name</label>
+            </div>
+            <div id="group-file" class="form-group col s12"  >
+                <span style="margin-right: 90px;">Question Image</span>  
+                <input type="file" name="dfile" autocomplete="off" >
+                
+            </div>
+            <br><br><br><br>
+            <br><br><br><br>
+             
+               
+            <div class="input-field col s4">
+                <input placeholder="Question Marks" name="dmarks" id="questionmarks" type="text" class="validate">
+                <label for="first_name">Question Marks</label>
+            </div>
+            
+            <br>
+      </div>    
           <br><br>
           <input class="waves-effect waves-light btn" type="submit" value='Add Question'>
         </form>
       </div>
       <br><br>
-
+      
     </div>
   </div>
 
@@ -107,4 +147,7 @@
     <br>
     <a style="align-content: center" href="{{url_for('exams.submit')}}"><input class="waves-effect waves-light btn" type="submit" value='Submit'></a>
     <br><br>
+    
+    
+      
     {% endblock %}
