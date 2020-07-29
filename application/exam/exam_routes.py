@@ -164,7 +164,6 @@ def addquestion():
         question_type = request.form['question_type']
         if question_type == 'Descriptive':
             exam_id = session['exam_id']
-            
             question = request.form['dquestion']
             file = request.files['dfile']
             marks = request.form['dmarks']
@@ -217,7 +216,7 @@ def submit():
 @exams.route('/taketest',methods=['POST','GET'])
 def taketest():
     if request.method == 'POST':
-        examid = int(request.form['examid'])
+        examid = request.form['examid']
         name = request.form['name']
         rollno = request.form['rollno']
         branch = request.form['branch']
