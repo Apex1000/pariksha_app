@@ -75,3 +75,22 @@ class User(UserMixin, db.Model):
     def __repr__(self):
         return '<User {}>'.format(self.username)    
 
+class Teachers(db.Model):
+    """Teacher account model."""
+    __tablename__ = 'teachers'
+
+    id = db.Column(db.Integer,primary_key=True)
+    username = db.Column(db.String(100),nullable=False,unique=False)
+    firstname = db.Column(db.String(100),nullable=False,unique=False)
+    lastname = db.Column(db.String(100),nullable=True,unique=False)
+    skill = db.Column(db.String(1000),nullable=True,unique=False)
+    email = db.Column(db.String(40),nullable=False)
+    mobile = db.Column(db.String(100))
+    address = db.Column(db.String(100))
+    city = db.Column(db.String(100))
+    state = db.Column(db.String(100))
+    pin_code = db.Column(db.String(100))
+    aboutme = db.Column(db.String(1000))
+
+
+    
