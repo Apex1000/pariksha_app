@@ -55,26 +55,10 @@ class User(UserMixin, db.Model):
     """User account model."""
     __tablename__ = 'login-users'
     
-    id = db.Column(
-        db.Integer,
-        primary_key=True
-    )
-    name = db.Column(
-        db.String(100),
-        nullable=False,
-        unique=False
-    )
-    email = db.Column(
-        db.String(40),
-        unique=True,
-        nullable=False
-    )
-    password = db.Column(
-        db.String(200),
-        primary_key=False,
-        unique=False,
-        nullable=False
-	)
+    id = db.Column(db.Integer,primary_key=True)
+    name = db.Column(db.String(100),nullable=False,unique=False)
+    email = db.Column(db.String(40),unique=True,nullable=False)
+    password = db.Column(db.String(200),primary_key=False,unique=False,nullable=False)
     
 
     def set_password(self, password):
@@ -90,3 +74,4 @@ class User(UserMixin, db.Model):
 
     def __repr__(self):
         return '<User {}>'.format(self.username)    
+

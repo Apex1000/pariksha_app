@@ -17,12 +17,28 @@ from werkzeug.utils import secure_filename
 from flask import Blueprint, render_template
 
 # Blueprint Configuration
-admins = Blueprint('admins',__name__,
+admin = Blueprint('admin',__name__,
                     template_folder='templates',
                     static_folder='static/admin',
                     url_prefix='/admin'
                     )
 
-@admins.route('/')
-def admin():
-    return render_template('admin/admin.html')
+@admin.route('/')
+def dashboard():
+    return render_template('admin/admin.html',title='Pariksha-Admin')
+
+@admin.route('/students')
+def students():
+    return render_template('admin/students.html',title='Pariksha-Admin')
+
+@admin.route('/newstudent')
+def newstudent():
+    return render_template('admin/newstudent.html',title='Pariksha-Admin')
+
+@admin.route('/teachers')
+def teachers():
+    return render_template('admin/teachers.html',title='Pariksha-Admin')
+
+@admin.route('/newteacher')
+def newteacher():
+    return render_template('admin/newteacher.html',title='Pariksha-Admin')
