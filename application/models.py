@@ -54,7 +54,7 @@ class Feedback(db.Model):
 class User(UserMixin, db.Model):
     """User account model."""
     __tablename__ = 'login-users'
-    
+
     id = db.Column(db.Integer,primary_key=True)
     name = db.Column(db.String(100),nullable=False,unique=False)
     email = db.Column(db.String(40),unique=True,nullable=False)
@@ -78,7 +78,7 @@ class User(UserMixin, db.Model):
 class Teachers(db.Model):
     """Teacher account model."""
     __tablename__ = 'teachers'
-
+    
     id = db.Column(db.Integer,primary_key=True)
     username = db.Column(db.String(100),nullable=False,unique=False)
     firstname = db.Column(db.String(100),nullable=False,unique=False)
@@ -92,5 +92,20 @@ class Teachers(db.Model):
     pin_code = db.Column(db.String(100))
     aboutme = db.Column(db.String(1000))
 
-
+class Student(db.Model):
+    """Students account model."""
+    __tablename__ = 'student'
+    
+    id = db.Column(db.Integer,primary_key=True)
+    admission_no = db.Column(db.String(100),nullable=False,unique=True)
+    firstname = db.Column(db.String(100),nullable=False,unique=False)
+    lastname = db.Column(db.String(100),nullable=True,unique=False)
+    standard = db.Column(db.String(1000),nullable=True,unique=False)
+    mobile = db.Column(db.String(100))
+    father_name = db.Column(db.String(100))
+    mother_name = db.Column(db.String(100))
+    address = db.Column(db.String(100))
+    city = db.Column(db.String(100))
+    state = db.Column(db.String(100))
+    pin_code = db.Column(db.String(100))
     

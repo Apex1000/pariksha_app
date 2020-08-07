@@ -25,15 +25,22 @@ admin = Blueprint('admin',__name__,
 
 @admin.route('/')
 def dashboard():
-    return render_template('admin/admin.html',title='Pariksha-Admin')
+    count = Teachers.query.count()
+    return render_template('admin/admin.html',
+                            title='Pariksha-Admin',
+                            countteacher=count)
 
 @admin.route('/students')
 def students():
     return render_template('admin/students.html',title='Pariksha-Admin')
 
 @admin.route('/newstudent',methods=['POST','GET'])
-def newstudent():    
+def newstudent():
     return render_template('admin/newstudent.html',title='Pariksha-Admin')
+
+@admin.route('/class_student/<id>',methods=['GET'])
+def class_student(id):
+    return render_template('admin/class_students.html',title='Pariksha-Admin',std=id)
 
 @admin.route('/teachers')
 def teachers():
