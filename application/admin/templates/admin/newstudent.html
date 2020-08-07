@@ -41,7 +41,7 @@
                 </div>
               </div>
               <div class="card-body">
-                <form action="{{url_for('admin.newteacher')}}" method="POST">
+                <form action="{{url_for('admin.newstudent')}}" method="POST">
                   <!-- User -->
                   <h6 class="heading-small text-muted mb-4">User information</h6>
                   <div class="pl-lg-4">
@@ -70,20 +70,20 @@
                       <div class="col-lg-6">
                           <div class="form-group">
                             <label class="form-control-label" for="input-last-name">Standard</label><br>
-                            <select id='qanswer' name='timezone' name='timezone' class='browser-default'>
+                            <select id='qanswer' name='std' name='std' class='browser-default'>
                               <option value='opt0'>-----</option>
-                              <option value='class1'>Class 1</option>
-                              <option value='class2'>Class 2</option>
-                              <option value='class3'>Class 3</option>
-                              <option value='class4'>Class 4</option>
-                              <option value='class5'>Class 5</option>
-                              <option value='class6'>Class 6</option>
-                              <option value='class7'>Class 7</option>
-                              <option value='class8'>Class 8</option>
-                              <option value='class9'>Class 9</option>
-                              <option value='class10'>Class 10</option>
-                              <option value='class11'>Class 11</option>
-                              <option value='class12'>Class 12</option>
+                              <option value='1'>Class 1</option>
+                              <option value='2'>Class 2</option>
+                              <option value='3'>Class 3</option>
+                              <option value='4'>Class 4</option>
+                              <option value='5'>Class 5</option>
+                              <option value='6'>Class 6</option>
+                              <option value='7'>Class 7</option>
+                              <option value='8'>Class 8</option>
+                              <option value='9'>Class 9</option>
+                              <option value='10'>Class 10</option>
+                              <option value='11'>Class 11</option>
+                              <option value='12'>Class 12</option>
                             </select>
                           </div>
                         </div>
@@ -96,13 +96,13 @@
                     <div class="col-lg-6">
                         <div class="form-group">
                           <label class="form-control-label" for="input-father-name">Father Name</label>
-                          <input type="text" id="input-father-name" class="form-control" placeholder="Father Name" value="" name="father-name">
+                          <input type="text" id="input-father-name" class="form-control" placeholder="Father Name" value="" name="father_name">
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group">
                           <label class="form-control-label" for="input-mother-name">Mother Name</label>
-                          <input type="text" id="input-mother-name" class="form-control" placeholder="Mother Name" value="" name="mother-name">
+                          <input type="text" id="input-mother-name" class="form-control" placeholder="Mother Name" value="" name="mother_name">
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -164,7 +164,7 @@
                     <h3 class="mb-0">Total Teachers</h3>
                   </div>
                   <div class="col text-right">
-                    <a href="{{url_for('admin.teachers')}}" class="btn btn-sm btn-primary">See all</a>
+                    <a href="{{url_for('admin.students')}}" class="btn btn-sm btn-primary">See all</a>
                   </div>
                 </div>
               </div>

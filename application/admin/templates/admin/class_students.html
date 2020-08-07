@@ -68,6 +68,7 @@
                 </tr>
               </thead>
               <tbody class="list">
+                {% for i in data %}
                 <tr>
                   <th scope="row">
                     <div class="media align-items-center">
@@ -79,13 +80,15 @@
                       </a>
                       <div class="media-body">
                         <a href=""
-                          ><span class="name mb-0 text-sm">Class 12</span></a
+                          ><span class="name mb-0 text-sm"
+                            >Class {{std}}</span
+                          ></a
                         >
                       </div>
                     </div>
                   </th>
                   <td class="budget">
-                    $2500 USD
+                    {{i.firstname}} {{i.lastname}}
                   </td>
                   <td>
                     <span class="badge badge-dot mr-4">
@@ -134,6 +137,7 @@
                     </div>
                   </td>
                 </tr>
+                {% endfor %}
               </tbody>
             </table>
           </div>

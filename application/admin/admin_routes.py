@@ -12,7 +12,7 @@ import uuid
 import os
 import urllib.request
 from datetime import datetime
-from ..models import Teachers
+from ..models import Teachers,Studentdata
 from werkzeug.utils import secure_filename
 from flask import Blueprint, render_template
 
@@ -36,11 +36,30 @@ def students():
 
 @admin.route('/newstudent',methods=['POST','GET'])
 def newstudent():
-    return render_template('admin/newstudent.html',title='Pariksha-Admin')
+    if request.method == "POST":
+        admisson_no = request.form['admisson_no']
+        firstname = request.form['firstname']
+        lastname = request.form['lastname']
+        std = request.form['std']
+        mobile = request.form['mobile']
+        father_name = request.form['father_name']
+        mother_name = request.form['mother_name']
+        address =request.form['address']
+        city = request.form['city']
+        state = request.form['state']
+        pin_code = request.form['postalcode']
+        newstudent = Studentdata(admission_no=admisson_no,firstname=firstname,lastname=lastname,standard=std,mobile=mobile,
+                            father_name=father_name,mother_name=mother_name,address=address,city=city,state=state,pin_code=pin_code)
+        db.session.add(newstudent)
+        db.session.commit()
+        return redirect(url_for('admin.newstudent'))
+    students = Studentdata.query.all()
+    return render_template('admin/newstudent.html',title='Pariksha-Admin',data = students)
 
 @admin.route('/class_student/<id>',methods=['GET'])
 def class_student(id):
-    return render_template('admin/class_students.html',title='Pariksha-Admin',std=id)
+    data = Studentdata.query.filter_by(standard=id).all()
+    return render_template('admin/class_students.html',title='Pariksha-Admin',data=data,std=id)
 
 @admin.route('/teachers')
 def teachers():

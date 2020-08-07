@@ -92,9 +92,9 @@ class Teachers(db.Model):
     pin_code = db.Column(db.String(100))
     aboutme = db.Column(db.String(1000))
 
-class Student(db.Model):
+class Studentdata(db.Model):
     """Students account model."""
-    __tablename__ = 'student'
+    __tablename__ = 'studentdata'
     
     id = db.Column(db.Integer,primary_key=True)
     admission_no = db.Column(db.String(100),nullable=False,unique=True)
