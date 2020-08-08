@@ -12,7 +12,7 @@ import uuid
 import os
 import urllib.request
 from datetime import datetime
-from ..models import Teachers,Studentdata
+from ..models import Teachers,Studentdata,Exams,AnswerSheet,Studentdata
 from werkzeug.utils import secure_filename
 from flask import Blueprint, render_template
 
@@ -26,9 +26,15 @@ admin = Blueprint('admin',__name__,
 @admin.route('/')
 def dashboard():
     count = Teachers.query.count()
+    studentdata = Studentdata.query.all()
+    data = Exams.query.all()
+    eanswersheet = AnswerSheet.query.count()
     return render_template('admin/admin.html',
                             title='Pariksha-Admin',
-                            countteacher=count)
+                            countteacher=count,
+                            data = data,
+                            count = eanswersheet,
+                            studentdata = studentdata)
 
 @admin.route('/students')
 def students():
