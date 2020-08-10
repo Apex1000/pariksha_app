@@ -30,7 +30,7 @@ def dashboard():
     studentcount = Studentdata.query.count()
     data = Exams.query.all()
     eanswersheet = AnswerSheet.query.count()
-    return render_template('admin/admin.html',
+    return render_template('main/admin.html',
                             title='Pariksha-Admin',
                             countteacher=count,
                             data = data,
@@ -40,7 +40,7 @@ def dashboard():
 
 @admin.route('/students')
 def students():
-    return render_template('admin/students.html',title='Pariksha-Admin')
+    return render_template('students/students.html',title='Pariksha-Admin')
 
 @admin.route('/newstudent',methods=['POST','GET'])
 def newstudent():
@@ -62,24 +62,24 @@ def newstudent():
         db.session.commit()
         return redirect(url_for('admin.newstudent'))
     students = Studentdata.query.all()
-    return render_template('admin/newstudent.html',title='Pariksha-Admin',data = students)
+    return render_template('studnets/newstudent.html',title='Pariksha-Admin',data = students)
 
 @admin.route('/profile/<id>')
 def studentprofile(id):
     data = Studentdata.query.filter_by(admission_no=id).first()
-    return render_template('admin/studentprofile.html',title='Pariksha-Admin',
+    return render_template('students/studentprofile.html',title='Pariksha-Admin',
                             data = data)
 
 @admin.route('/class_student/<id>',methods=['GET'])
 def class_student(id):
     data = Studentdata.query.filter_by(standard=id).all()
-    return render_template('admin/class_students.html',title='Pariksha-Admin',data=data,std=id)
+    return render_template('students/class_students.html',title='Pariksha-Admin',data=data,std=id)
 
 @admin.route('/teachers')
 def teachers():
     teachers = Teachers.query.all()
     count = Teachers.query.count()
-    return render_template('admin/teachers.html',title='Pariksha-Admin',data=teachers,count=count)
+    return render_template('teachers/teachers.html',title='Pariksha-Admin',data=teachers,count=count)
 
 @admin.route('/newteacher',methods=['POST','GET'])
 def newteacher():
@@ -101,4 +101,4 @@ def newteacher():
         db.session.commit()
         return redirect(url_for('admin.newteacher'))
     teachers = Teachers.query.all()
-    return render_template('admin/newteacher.html',title='Pariksha-Admin',data=teachers)
+    return render_template('teachers/newteacher.html',title='Pariksha-Admin',data=teachers)
