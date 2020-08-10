@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify,render_template, redirect, url_for,session,message_flashed,send_file,send_from_directory
 from flask_sqlalchemy import SQLAlchemy
-
+from flask_assets import Environment
 db = SQLAlchemy()
 app = Flask(__name__)
 def create_app():
