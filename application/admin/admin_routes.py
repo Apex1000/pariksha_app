@@ -19,7 +19,7 @@ from flask import Blueprint, render_template
 # Blueprint Configuration
 admin = Blueprint('admin',__name__,
                     template_folder='templates',
-                    static_folder='static/admin',
+                    static_folder='static',
                     url_prefix='/admin'
                     )
 
@@ -27,6 +27,7 @@ admin = Blueprint('admin',__name__,
 def dashboard():
     count = Teachers.query.count()
     studentdata = Studentdata.query.all()
+    studentcount = Studentdata.query.count()
     data = Exams.query.all()
     eanswersheet = AnswerSheet.query.count()
     return render_template('admin/admin.html',
@@ -34,7 +35,8 @@ def dashboard():
                             countteacher=count,
                             data = data,
                             count = eanswersheet,
-                            studentdata = studentdata)
+                            studentdata = studentdata,
+                            studentcount = studentcount)
 
 @admin.route('/students')
 def students():
@@ -61,6 +63,12 @@ def newstudent():
         return redirect(url_for('admin.newstudent'))
     students = Studentdata.query.all()
     return render_template('admin/newstudent.html',title='Pariksha-Admin',data = students)
+
+@admin.route('/profile/<id>')
+def studentprofile(id):
+    data = Studentdata.query.filter_by(admission_no=id).first()
+    return render_template('admin/studentprofile.html',title='Pariksha-Admin',
+                            data = data)
 
 @admin.route('/class_student/<id>',methods=['GET'])
 def class_student(id):

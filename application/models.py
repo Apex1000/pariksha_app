@@ -83,6 +83,7 @@ class Teachers(db.Model):
     username = db.Column(db.String(100),nullable=False,unique=False)
     firstname = db.Column(db.String(100),nullable=False,unique=False)
     lastname = db.Column(db.String(100),nullable=True,unique=False)
+    photo = db.Column(db.String())
     skill = db.Column(db.String(1000),nullable=True,unique=False)
     email = db.Column(db.String(40),nullable=False)
     mobile = db.Column(db.String(100))
@@ -91,7 +92,7 @@ class Teachers(db.Model):
     state = db.Column(db.String(100))
     pin_code = db.Column(db.String(100))
     aboutme = db.Column(db.String(1000))
-
+    
 class Studentdata(db.Model):
     """Students account model."""
     __tablename__ = 'studentdata'
@@ -100,6 +101,7 @@ class Studentdata(db.Model):
     admission_no = db.Column(db.String(100),nullable=False,unique=True)
     firstname = db.Column(db.String(100),nullable=False,unique=False)
     lastname = db.Column(db.String(100),nullable=True,unique=False)
+    photo = db.Column(db.String())
     standard = db.Column(db.String(1000),nullable=True,unique=False)
     mobile = db.Column(db.String(100))
     father_name = db.Column(db.String(100))
@@ -108,4 +110,3 @@ class Studentdata(db.Model):
     city = db.Column(db.String(100))
     state = db.Column(db.String(100))
     pin_code = db.Column(db.String(100))
-    

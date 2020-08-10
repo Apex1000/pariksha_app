@@ -88,7 +88,10 @@
                     </div>
                   </th>
                   <td class="budget">
-                    {{i.firstname}} {{i.lastname}}
+                    <a
+                      href="{{url_for('admin.studentprofile',id=i.admission_no)}}"
+                      >{{i.firstname}} {{i.lastname}}</a
+                    >
                   </td>
                   <td>
                     <span class="badge badge-dot mr-4">
