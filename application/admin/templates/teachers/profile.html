@@ -32,6 +32,7 @@
                   <img
                     src="{{url_for('static', filename='images/'+data.photo)}}"
                     class="rounded-circle"
+                    style="max-width: 100px;"
                   />
                 </a>
               </div>
@@ -39,24 +40,25 @@
           </div>
           <div
             class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4"
-          >
-            
-          </div>
+          ></div>
           <div class="card-body pt-0">
             <div class="text-center">
+              <br />
               <h5 class="h3">
-                {{data.firstname}}<span class="font-weight-light">,<p id="age"></p</span>
+                {{data.firstname}}<span class="font-weight-light"
+                  >,
+                  <p id="age"></p
+                ></span>
               </h5>
               <div class="h5 font-weight-300">
                 <i class="ni location_pin mr-2"></i>{{data.address}}
                 {{data.city}}
               </div>
               <div class="h5 mt-4">
-                <i class="ni business_briefcase-24 mr-2"></i>Mobile: {{data.mobile}}
+                <i class="ni business_briefcase-24 mr-2"></i>Mobile:
+                {{data.mobile}}
               </div>
-              <div>
-                <i class="ni education_hat mr-2"></i>Dob: {{data.dob}}
-              </div>
+              <div><i class="ni education_hat mr-2"></i>Dob: {{data.dob}}</div>
             </div>
           </div>
         </div>
@@ -226,16 +228,16 @@ A beautiful Dashboard for Bootstrap 4. It is Free and Open Source.</textarea
   </div>
 </div>
 <script>
-    var dob = "{{data.dob}}";
-    var d = dob.split("-");
-  
-    var today = new Date();
-    var birthDate = new Date(d[0] + "/" + d[1] + "/" + d[2]);
-    var age = today.getFullYear() - birthDate.getFullYear();
-    var m = today.getMonth() - birthDate.getMonth();
-    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-      age--;
-    }
-    document.getElementById("age").innerHTML = age;
-  </script>
+  var dob = "{{data.dob}}";
+  var d = dob.split("-");
+
+  var today = new Date();
+  var birthDate = new Date(d[0] + "/" + d[1] + "/" + d[2]);
+  var age = today.getFullYear() - birthDate.getFullYear();
+  var m = today.getMonth() - birthDate.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+    age--;
+  }
+  document.getElementById("age").innerHTML = age;
+</script>
 {% endblock %}

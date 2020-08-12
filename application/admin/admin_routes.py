@@ -56,6 +56,8 @@ def newstudent():
         firstname = request.form['firstname']
         lastname = request.form['lastname']
         std = request.form['std']
+        dob = request.form['dob']
+        photo = request.files['photo']
         mobile = request.form['mobile']
         father_name = request.form['father_name']
         mother_name = request.form['mother_name']
@@ -63,13 +65,16 @@ def newstudent():
         city = request.form['city']
         state = request.form['state']
         pin_code = request.form['postalcode']
+        filename = secure_filename(photo.filename)
+        safefilename = secure_filename(randstr() + '-' + photo.filename)
+        photo.save(os.path.join(IMAGE_DIR,safefilename))
         newstudent = Studentdata(admission_no=admisson_no,firstname=firstname,lastname=lastname,standard=std,mobile=mobile,
-                            father_name=father_name,mother_name=mother_name,address=address,city=city,state=state,pin_code=pin_code)
+                            dob=dob,photo=safefilename,father_name=father_name,mother_name=mother_name,address=address,city=city,state=state,pin_code=pin_code)
         db.session.add(newstudent)
         db.session.commit()
         return redirect(url_for('admin.newstudent'))
     students = Studentdata.query.all()
-    return render_template('studnets/newstudent.html',title='Pariksha-Admin',data = students)
+    return render_template('students/newstudent.html',title='Pariksha-Admin',data = students)
 
 @admin.route('/students/profile/<id>')
 def studentprofile(id):
