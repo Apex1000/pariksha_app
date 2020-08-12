@@ -41,7 +41,7 @@
                 </div>
               </div>
               <div class="card-body">
-                <form action="{{url_for('admin.newteacher')}}" method="POST">
+                <form action="{{url_for('admin.newteacher')}}" method="POST" enctype="multipart/form-data">
                   <!-- User -->
                   <h6 class="heading-small text-muted mb-4">User information</h6>
                   <div class="pl-lg-4">
@@ -78,6 +78,19 @@
                           <input type="text" id="input-mobile-number" class="form-control" placeholder="Mobile Number" value="" name="mobile">
                         </div>
                       </div>
+                      <div class="col-lg-6">
+                          <div class="form-group">
+                            <label class="form-control-label" for="input-photo">Photo</label>
+                            <input type="file" id="input-photo" class="form-control" placeholder="Photo" value="" name="photo">
+                          </div>
+                        </div>
+                      <div class="col-lg-6">
+                          <div class="form-group">
+                            <label class="form-control-label" for="input-last-name">Date of Birth</label>
+                            <input type="date" id="input-dob" class="form-control" placeholder="DoB" value="" name="dob">
+                          </div>
+                      </div>
+
                     </div>
                   </div>
                   <!-- Teching info -->
