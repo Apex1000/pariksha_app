@@ -94,6 +94,8 @@ def newteacher():
         username = request.form['username']
         firstname = request.form['firstname']
         lastname = request.form['lastname']
+        photo = request.files['photo']
+        dob = request.form['dob']
         email = request.form['email']
         mobile = request.form['mobile']
         skill = request.form['skillinfo']
@@ -102,8 +104,11 @@ def newteacher():
         state = request.form['state']
         pin_code = request.form['postalcode']
         aboutme = request.form['aboutme']
+        filename = secure_filename(photo.filename)
+        safefilename = secure_filename(randstr() + '-' + photo.filename)
+        photo.save(os.path.join(IMAGE_DIR,safefilename))
         newteacher = Teachers(username=username,firstname=firstname,lastname=lastname,email=email,mobile=mobile,
-                            skill=skill,address=address,city=city,state=state,pin_code=pin_code,aboutme=aboutme)
+                            photo=safefilename,dob=dob,skill=skill,address=address,city=city,state=state,pin_code=pin_code,aboutme=aboutme)
         db.session.add(newteacher)
         db.session.commit()
         return redirect(url_for('admin.newteacher'))
