@@ -8,7 +8,7 @@
       <div class="header-body">
         <div class="row align-items-center py-4">
           <div class="col-lg-6 col-7">
-            <h6 class="h2 text-white d-inline-block mb-0">Teachers Section</h6>
+            <h6 class="h2 text-white d-inline-block mb-0">Workers Section</h6>
             <nav
               aria-label="breadcrumb"
               class="d-none d-md-inline-block ml-md-4"
@@ -20,14 +20,14 @@
                   ></a>
                 </li>
                 <li class="breadcrumb-item">
-                  <a href="{{url_for('admin.teachers')}}">Teachers</a>
+                  <a href="{{url_for('admin.workers')}}">Workers</a>
                 </li>
               </ol>
             </nav>
           </div>
           <div class="col-lg-6 col-5 text-right">
             <a
-              href="{{url_for('admin.newteacher')}}"
+              href="{{url_for('admin.newworker')}}"
               class="btn btn-sm btn-neutral"
               >New</a
             >
@@ -163,7 +163,7 @@
             <div class="row">
               <div class="col">
                 <h5 class="card-title text-uppercase text-muted mb-0"></h5>
-                <a href="{{url_for('admin.teachersprofile',id=i.id)}}"
+                <a href="{{url_for('admin.workerprofile',id=i.id)}}"
                   ><span class="h2 font-weight-bold mb-0"
                     >{{i.firstname}} {{i.lastname}}</span
                   ></a

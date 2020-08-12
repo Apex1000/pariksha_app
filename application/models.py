@@ -45,6 +45,7 @@ class AnswerSheet(db.Model):
     rollno = db.Column(db.String(50))
     answer = db.Column(db.String(5000))
     grade = db.Column(db.String(50))
+
 class Feedback(db.Model):
     __tablename__ = 'feedback'
     feedback_id = db.Column(db.Integer, primary_key=True)
@@ -83,6 +84,7 @@ class Teachers(db.Model):
     username = db.Column(db.String(100),nullable=False,unique=False)
     firstname = db.Column(db.String(100),nullable=False,unique=False)
     lastname = db.Column(db.String(100),nullable=True,unique=False)
+    dob = db.Column(db.String())
     photo = db.Column(db.String())
     skill = db.Column(db.String(1000),nullable=True,unique=False)
     email = db.Column(db.String(40),nullable=False)
@@ -95,17 +97,34 @@ class Teachers(db.Model):
     
 class Studentdata(db.Model):
     """Students account model."""
-    __tablename__ = 'studentdata'
+    __tablename__ = 'student'
     
     id = db.Column(db.Integer,primary_key=True)
     admission_no = db.Column(db.String(100),nullable=False,unique=True)
     firstname = db.Column(db.String(100),nullable=False,unique=False)
     lastname = db.Column(db.String(100),nullable=True,unique=False)
+    dob = db.Column(db.String())
     photo = db.Column(db.String())
     standard = db.Column(db.String(1000),nullable=True,unique=False)
     mobile = db.Column(db.String(100))
     father_name = db.Column(db.String(100))
     mother_name = db.Column(db.String(100))
+    address = db.Column(db.String(100))
+    city = db.Column(db.String(100))
+    state = db.Column(db.String(100))
+    pin_code = db.Column(db.String(100))
+
+class Workers(db.Model):
+    """Students account model."""
+    __tablename__ = 'workers'
+    
+    id = db.Column(db.Integer,primary_key=True)
+    firstname = db.Column(db.String(100),nullable=False,unique=False)
+    lastname = db.Column(db.String(100),nullable=True,unique=False)
+    dob = db.Column(db.String())
+    photo = db.Column(db.String())
+    category = db.Column(db.String(1000),nullable=True,unique=False)
+    mobile = db.Column(db.String(100))
     address = db.Column(db.String(100))
     city = db.Column(db.String(100))
     state = db.Column(db.String(100))
