@@ -1,0 +1,138 @@
+{% extends "./base/base.html" %} {% block content %}
+<div class="main-content" id="panel">
+  <!-- Topnav -->
+  {%include "./base/nevbar.html"%}
+  <div class="header bg-primary pb-6">
+    <div class="container-fluid">
+      <div class="header-body">
+        <div class="row align-items-center py-4">
+          <div class="col-lg-6 col-7">
+            <h6 class="h2 text-white d-inline-block mb-0">Attendance Block</h6>
+          </div>
+          <div class="col-lg-6 col-5 text-right"></div>
+        </div>
+        <!-- Card stats -->
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid mt--6">
+    <div class="row">
+      <div class="col-xl-8">
+        <div class="card">
+          <div class="card-header border-0">
+            <div class="row align-items-center">
+              <div class="col">
+                <h3 class="mb-0">Take Attendance</h3>
+              </div>
+              <div class="col text-right">
+                <a href="#!" class="btn btn-sm btn-primary">See all</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div
+              id="stacked-cards-block"
+              class="stackedcards stackedcards--animatable init"
+            >
+              <div class="stackedcards-container">
+                {% for i in data %}
+                <div class="card-item">
+                  <div class="col-xl-12 order-xl-12">
+                    <div class="card card-profile">
+                      <img
+                        src="{{url_for('static', filename='images/'+i.photo)}}"
+                        alt="Image placeholder"
+                        class="card-img-top"
+                      />
+                      <div class="card-body pt-0">
+                        <div class="text-center">
+                          <h5 class="h3">
+                            {{i.firstname}}<span class="font-weight-light">
+                            </span>
+                          </h5>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+              <br /><br />
+              <div class="stackedcards--animatable stackedcards-overlay top">
+                BACK
+              </div>
+              <div class="stackedcards--animatable stackedcards-overlay right">
+                PRESENT
+              </div>
+              <div class="stackedcards--animatable stackedcards-overlay left">
+                ABSENT
+              </div>
+            </div>
+
+            <div class="global-actions">
+              <div class="left-action">Absent</div>
+              <div class="top-action">Back</div>
+              <div class="right-action">Present</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-4">
+        <div class="card">
+          <div class="card-header border-0">
+            <div class="row align-items-center">
+              <div class="col">
+                <h3 class="mb-0">Top Students</h3>
+              </div>
+              <div class="col text-right">
+                <a href="#!" class="btn btn-sm btn-primary">See all</a>
+              </div>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <!-- Projects table -->
+            <table class="table align-items-center table-flush">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">Attendance Percentage</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for i in data %}
+                <tr>
+                  <th scope="row">
+                    {{i.firstname}} {{i.lastname}}
+                  </th>
+
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <span class="mr-2">60%</span>
+                      <div>
+                        <div class="progress">
+                          <div
+                            class="progress-bar bg-gradient-danger"
+                            role="progressbar"
+                            aria-valuenow="60"
+                            aria-valuemin="0"
+                            aria-valuemax="100"
+                            style="width: 60%;"
+                          ></div>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Footer -->
+    {% include "./base/footer.html" %}
+  </div>
+</div>
+
+{% endblock %}

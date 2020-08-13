@@ -41,6 +41,11 @@
       href="https://demos.creative-tim.com/argon-dashboard/assets/css/argon.min.css?v=1.2.0"
       type="text/css"
     />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static', filename='attendance/style.css')}}"
+      type="text/css"
+    />
   </head>
 
   <body>
@@ -87,6 +92,12 @@
                 <a class="nav-link" href="{{url_for('admin.workers')}}">
                   <i class="ni ni-single-02 text-yellow"></i>
                   <span class="nav-link-text">Workers</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{url_for('attendance.dashboard')}}">
+                  <i class="ni ni-bullet-list-67 text-default"></i>
+                  <span class="nav-link-text">Attendance Block</span>
                 </a>
               </li>
               <li class="nav-item">
@@ -190,5 +201,7 @@
     <script src="https://demos.creative-tim.com/argon-dashboard/assets/vendor/chart.js/dist/Chart.extension.js"></script>
     <!-- Argon JS -->
     <script src="https://demos.creative-tim.com/argon-dashboard/assets/js/argon.min.js?v=1.2.0"></script>
+    <!-- Attendance js -->
+    <script src="{{url_for('static',filename='attendance/style.js')}}"></script>
   </body>
 </html>
