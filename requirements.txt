@@ -97,7 +97,7 @@ SQLAlchemy-Utils==0.36.6
 tomlkit==0.5.8
 tzlocal==2.1
 uritemplate==3.0.1
-urllib3==1.25.9
+urllib3==1.26.5
 uuid==1.30
 webassets==2.0
 websocket-client==0.57.0
